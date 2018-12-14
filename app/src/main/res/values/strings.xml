@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name" translatable="false">Sports Activities</string>
+    <string name="txt_google_login">Sign in with Google</string>
+    <string name="txt_facebook_login">Sign in with Facebook</string>
+</resources>
