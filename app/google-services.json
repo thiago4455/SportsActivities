@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "907265309183",
+    "firebase_url": "https://sportsactivities-466c9.firebaseio.com",
+    "project_id": "sportsactivities-466c9",
+    "storage_bucket": "sportsactivities-466c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907265309183:android:44a9884c2b7d892d",
+        "android_client_info": {
+          "package_name": "app.saturno.thiago.sportsactivities"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907265309183-3vvgsh6g1q49rtq9hlj4jadmv6c5l7ct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcJhxoqn5mroBcAk5ADSoleLny1X7zki8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
