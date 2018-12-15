@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#CF4332"
         android:text="@string/txt_google_login"
+        android:id="@+id/btnGoogle"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:drawableLeft="@drawable/google"
