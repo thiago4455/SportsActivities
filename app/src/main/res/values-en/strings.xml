@@ -2,4 +2,8 @@
 <resources>
     <string name="txt_facebook_login">Sign in with Facebook</string>
     <string name="txt_google_login">Sign in with Google</string>
+    <string name="name">Name</string>
+    <string name="age">Age</string>
+    <string name="phone">Phone</string>
+    <string name="sex">Sex</string>
 </resources>
