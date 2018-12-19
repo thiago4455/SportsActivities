@@ -2,7 +2,9 @@ package app.saturno.thiago.sportsactivities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -29,12 +31,17 @@ public class CadastroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Map<String, Object> usuario = new HashMap<>();
-                usuario.put("nome",((TextView) findViewById(R.id.txtNome)).getText().toString());
-                usuario.put("idade",Integer.parseInt(((TextView) findViewById(R.id.txtIdade)).getText().toString()));
-                usuario.put("sexo",((TextView) findViewById(R.id.txtSexo)).getText().toString());
-                usuario.put("telefone",((TextView) findViewById(R.id.txtTelefone)).getText().toString());
+                usuario.put("nome", ((TextView) findViewById(R.id.txtNome)).getText().toString());
+                usuario.put("idade", Integer.parseInt(((TextView) findViewById(R.id.txtIdade)).getText().toString()));
+                usuario.put("sexo", ((TextView) findViewById(R.id.txtSexo)).getText().toString());
+                usuario.put("telefone", ((TextView) findViewById(R.id.txtTelefone)).getText().toString());
 
-                TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+                TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+                if (ActivityCompat.checkSelfPermission(CadastroActivity.this, android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                    Intent i = new Intent(CadastroActivity.this,ErroActivity.class);
+                    i.putExtra("tipo","permissao");
+                    return;
+                }
                 final String imei = telephonyManager.getDeviceId();
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 db.collection("usuarios").document(imei)
@@ -42,7 +49,9 @@ public class CadastroActivity extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                startActivity(new Intent(CadastroActivity.this, MainActivity.class));
+                                Intent i = new Intent(CadastroActivity.this, MainActivity.class);
+                                i.putExtra("id", imei);
+                                startActivity(i);
                                 finish();
                             }
                         })

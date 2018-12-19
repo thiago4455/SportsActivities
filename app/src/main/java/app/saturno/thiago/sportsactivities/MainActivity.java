@@ -133,6 +133,9 @@ public class MainActivity extends AppCompatActivity {
             locationManager.requestSingleUpdate(criteria, locationListener, looper);
         }
 
+
+        Log.e("CORD:", "Latitude: "+latitude);
+        Log.e("CORD:", "Logitude: "+longitude);
     }
     private double longitude = 0;
     private double latitude = 0;

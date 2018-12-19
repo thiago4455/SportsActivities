@@ -7,4 +7,6 @@
     <string name="phone">Telefone</string>
     <string name="sex">Sexo</string>
     <string name="sign_in">CADASTRAR</string>
+    <string name="conection_error">Erro de conexão.  Toque para tentar novamente</string>
+    <string name="permission_error">Erro de permissão. Toque para tentar novamente.</string>
 </resources>
