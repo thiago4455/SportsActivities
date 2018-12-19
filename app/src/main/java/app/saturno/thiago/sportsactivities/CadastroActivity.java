@@ -43,12 +43,14 @@ public class CadastroActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 startActivity(new Intent(CadastroActivity.this, MainActivity.class));
+                                finish();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 startActivity(new Intent(CadastroActivity.this, ErroActivity.class));
+                                finish();
                             }
                         });
             }

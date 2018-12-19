@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:focusable="false">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="14dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:src="@drawable/futebol"
+            android:scaleType="centerCrop"
+            android:alpha="0.4"
+            />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/perfil"
+            />
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:id="@+id/txtNome"
+                android:drawableRight="@drawable/ic_masculine"
+                android:text="Eduardo Silva  "
+                android:focusable="false"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:id="@+id/txtIdade"
+                android:text="19 anos"
+                android:focusable="false"/>
+
+            <TextView
+                android:id="@+id/txtTelefone"
+                android:layout_width="wrap_content"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:drawableLeft="@drawable/ic_whatsapp"
+                android:text="  (31) 98367-9954"
+                android:focusable="false" />
+        </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

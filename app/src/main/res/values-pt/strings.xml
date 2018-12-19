@@ -3,4 +3,8 @@
     <string name="txt_facebook_login">Entrar com o Facebook</string>
     <string name="txt_google_login">Entrar com o Google</string>
     <string name="name">Nome</string>
+    <string name="age">Idade</string>
+    <string name="phone">Telefone</string>
+    <string name="sex">Sexo</string>
+    <string name="sign_in">CADASTRAR</string>
 </resources>

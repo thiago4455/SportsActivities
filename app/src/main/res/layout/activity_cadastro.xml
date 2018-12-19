@@ -1,54 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="app.saturno.thiago.sportsactivities.CadastroActivity">
+    android:background="@android:color/black"
+    android:orientation="vertical">
 
-    <EditText
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
-        android:id="@+id/txtNome"
-        android:hint="@string/name"/>
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/cadbg"
+        android:alpha="0.6"/>
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
-        android:id="@+id/txtIdade"
-        android:layout_marginTop="40dp"
-        android:hint="@string/age"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
-        android:id="@+id/txtSexo"
-        android:layout_marginTop="80dp"
-        android:hint="@string/sex"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
-        android:id="@+id/txtTelefone"
-        android:layout_marginTop="120dp"
-        android:hint="@string/phone"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CADASTRAR"
-        android:layout_marginTop="180dp"
-        android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/colorPrimary"
-        android:id="@+id/btnCadastrar"
-        android:textSize="30sp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/sign_in"
+            android:paddingBottom="10dp"
+            android:background="@drawable/topbar"
+            android:textSize="20dp"/>
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleImage"
+            android:layout_width="120dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/perfil"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/name"
+            android:layout_marginLeft="39dp"
+            android:textColor="@android:color/white"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:layout_marginTop="-11dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:textColorHint="@android:color/white"
+            app:backgroundTint="@android:color/white"
+            android:id="@+id/txtNome"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                android:layout_width="wrap_content"
+                android:text="@string/sex"
+                android:layout_marginLeft="39dp"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content" />
+                <EditText
+                    android:layout_width="160dp"
+                    android:layout_marginTop="-11dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:layout_marginLeft="35dp"
+                    android:textColorHint="@android:color/white"
+                    app:backgroundTint="@android:color/white"
+                    android:id="@+id/txtSexo"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="@string/age"
+                    android:layout_marginLeft="19dp"
+                    android:textColor="@android:color/white"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:layout_marginTop="-11dp"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"
+                    app:backgroundTint="@android:color/white"
+                    android:layout_marginLeft="15dp"
+                    android:id="@+id/txtIdade"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/phone"
+            android:layout_marginLeft="39dp"
+            android:paddingTop="20dp"
+            android:textColor="@android:color/white"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:layout_marginTop="-11dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtTelefone"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            app:backgroundTint="@android:color/white"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CADASTRAR"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="#ee202020"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/roudbtn"
+            android:padding="15dp"
+            android:id="@+id/btnCadastrar"
+            android:textSize="30sp"/>
+    </LinearLayout>
 </RelativeLayout>

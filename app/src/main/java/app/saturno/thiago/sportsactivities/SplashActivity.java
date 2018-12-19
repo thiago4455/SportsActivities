@@ -5,6 +5,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -42,7 +43,10 @@ public class SplashActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+
+                        Intent i = new Intent(SplashActivity.this, MainActivity.class);
+                        i.putExtra("id",document.getId());
+                        startActivity(i);
                         //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                     } else {
                        Log.e("Document not found:","IMEI: "+imei);
@@ -54,8 +58,12 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-        finish();
+        Handler h = new Handler();
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+            }
+        },2000);
     }
 }
