@@ -41,7 +41,49 @@ public class MainActivity extends AppCompatActivity {
         ((RelativeLayout) findViewById(R.id.lytBasquete)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                selecionarEsporte("basquete");
+            }
+        });
 
+        ((RelativeLayout) findViewById(R.id.lytFutebol)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selecionarEsporte("futebol");
+            }
+        });
+
+        ((RelativeLayout) findViewById(R.id.lytVolei)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selecionarEsporte("volei");
+            }
+        });
+
+        ((RelativeLayout) findViewById(R.id.lytHandebol)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selecionarEsporte("handebol");
+            }
+        });
+
+        ((RelativeLayout) findViewById(R.id.lytTenis)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selecionarEsporte("tenis");
+            }
+        });
+
+        ((RelativeLayout) findViewById(R.id.lytPeteca)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selecionarEsporte("peteca");
+            }
+        });
+
+        ((RelativeLayout) findViewById(R.id.lytAtletismo)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selecionarEsporte("atletismo");
             }
         });
 
