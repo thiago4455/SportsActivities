@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -100,10 +101,10 @@ public class MainActivity extends AppCompatActivity {
 
         data1.put("coordX", coordX);
         data1.put("coordY", coordY);
-        usuarios.document(id).set(data1);
+        usuarios.document(id).set(data1, SetOptions.merge());
 
         i.putExtra("id",id);
-        i.putExtra("esporte","basquete");
+        i.putExtra("esporte",esporte);
         i.putExtra("coordX",coordX);
         i.putExtra("coordY",coordY);
         startActivity(i);
