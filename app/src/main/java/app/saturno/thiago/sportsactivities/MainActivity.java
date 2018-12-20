@@ -130,6 +130,9 @@ public class MainActivity extends AppCompatActivity {
         criteria.setVerticalAccuracy(Criteria.ACCURACY_HIGH);
 
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if ( !locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+                Toast.makeText(MainActivity.this, "Ative seu GPS", Toast.LENGTH_SHORT).show();
+            }
             locationManager.requestSingleUpdate(criteria, locationListener, looper);
         }
 

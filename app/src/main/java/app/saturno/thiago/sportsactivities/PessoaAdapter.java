@@ -59,8 +59,8 @@ public class PessoaAdapter extends ArrayAdapter<Pessoa> {
                 .into(imageView);
 
 
-        txtNome.setText("Nome " + pessoa.getNome()+"  ");
-        txtIdade.setText("Idade " + pessoa.getIdade());
+        txtNome.setText(pessoa.getNome()+"  ");
+        txtIdade.setText(pessoa.getIdade()+" anos");
         txtTelefone.setText("  " + pessoa.getTelefone());
         if(pessoa.getSexo().equals("Masculino")){
             ((TextView)view.findViewById(R.id.txtNome)).setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_masculine,0);

@@ -138,7 +138,7 @@ public class CadastroActivity extends AppCompatActivity {
             if (ActivityCompat.checkSelfPermission(CadastroActivity.this, android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
                 Intent i = new Intent(CadastroActivity.this,ErroActivity.class);
                 i.putExtra("tipo","permissao");
-                return;
+                startActivity(i);
             }
             imei = telephonyManager.getDeviceId();
             StorageReference ref = storageReference.child("images/"+ imei);
@@ -193,6 +193,47 @@ public class CadastroActivity extends AppCompatActivity {
                     })
             ;
 
+        }else{
+            Toast.makeText(CadastroActivity.this, "Uploading", Toast.LENGTH_SHORT).show();
+            TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            if (ActivityCompat.checkSelfPermission(CadastroActivity.this, android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                Intent i = new Intent(CadastroActivity.this,ErroActivity.class);
+                i.putExtra("tipo","permissao");
+                startActivity(i);
+            }
+            imei = telephonyManager.getDeviceId();
+            Toast.makeText(CadastroActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
+            Log.e("TASK:", "URL: https://firebasestorage.googleapis.com/v0/b/sportsactivities-466c9.appspot.com/o/images%2Fprofile.png?alt=media&token=d8c071bd-0a66-4fa6-b782-c8adb1e5171f");
+
+
+            Map<String, Object> usuario = new HashMap<>();
+            usuario.put("nome", ((TextView) findViewById(R.id.txtNome)).getText().toString());
+            usuario.put("idade", Integer.parseInt(((TextView) findViewById(R.id.txtIdade)).getText().toString()));
+            usuario.put("sexo", ((Spinner) findViewById(R.id.txtSexo)).getSelectedItem().toString());
+            usuario.put("telefone", ((TextView) findViewById(R.id.txtTelefone)).getText().toString());
+            usuario.put("fotoPerfil", ("https://firebasestorage.googleapis.com/v0/b/sportsactivities-466c9.appspot.com/o/images%2Fprofile.png?alt=media&token=d8c071bd-0a66-4fa6-b782-c8adb1e5171f"));
+
+
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("usuarios").document(imei)
+                    .set(usuario)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Intent i = new Intent(CadastroActivity.this, MainActivity.class);
+                            i.putExtra("id", imei);
+                            startActivity(i);
+                            finish();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            startActivity(new Intent(CadastroActivity.this, ErroActivity.class));
+                            finish();
+                        }
+                    });
         }
     }
 
