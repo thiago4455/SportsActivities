@@ -9,4 +9,16 @@
     <string name="sign_in">CADASTRAR</string>
     <string name="conection_error">Erro de conexão.  Toque para tentar novamente</string>
     <string name="permission_error">Erro de permissão. Toque para tentar novamente.</string>
+    <string name="n_o_foram_encontradas_pessoas_nesse_esporte_em_um_raio_de_10km">Não foram encontradas pessoas nesse esporte em um raio de 10Km</string>
+    <string name="peoples">PESSOAS</string>
+    <string name="basketball">BASQUETE</string>
+    <string name="football">FUTEBOL</string>
+    <string name="volleyball">VOLEI</string>
+    <string name="handball">HANDEBOL</string>
+    <string name="tennis">TÊNIS</string>
+    <string name="peteca">PETÉCA</string>
+    <string name="athletics">ATLETISMO</string>
+    <string name="uploading">Enviando</string>
+    <string name="uploaded">Enviado</string>
+    <string name="failed">falhou</string>
 </resources>

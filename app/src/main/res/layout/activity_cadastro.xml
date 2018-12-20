@@ -35,7 +35,7 @@
             android:layout_height="130dp"
             android:layout_marginTop="25dp"
             android:id="@+id/imgPerfil"
-            android:src="@drawable/perfil"
+            android:src="@drawable/profile"
             android:layout_gravity="center"/>
 
         <TextView
@@ -70,9 +70,8 @@
                 android:layout_marginLeft="39dp"
                 android:textColor="@android:color/white"
                 android:layout_height="wrap_content" />
-                <EditText
+                <Spinner
                     android:layout_width="160dp"
-                    android:layout_marginTop="-11dp"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/white"
                     android:layout_marginLeft="35dp"
@@ -100,6 +99,7 @@
                     android:textColorHint="@android:color/white"
                     app:backgroundTint="@android:color/white"
                     android:layout_marginLeft="15dp"
+                    android:inputType="number"
                     android:id="@+id/txtIdade"/>
             </LinearLayout>
         </LinearLayout>
@@ -119,12 +119,13 @@
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
             app:backgroundTint="@android:color/white"
+            android:inputType="phone"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CADASTRAR"
+            android:text="@string/sign_in"
             android:layout_gravity="center_horizontal"
             android:backgroundTint="@color/colorPrimary"
             android:textColor="#ee202020"

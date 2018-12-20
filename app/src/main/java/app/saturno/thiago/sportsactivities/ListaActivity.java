@@ -58,7 +58,7 @@ public class ListaActivity extends AppCompatActivity implements AdapterView.OnIt
                                 double distancia = distancia(latitudeAtual,longitudeAtual,latitude,longitude);
                                 if(!id.equals(document.getId()) && distancia < 5){
                                     Pessoa pessoa = new Pessoa();
-                                    pessoa.setImei(document.getId());
+                                    pessoa.setFotoPerfil(document.getString("fotoPerfil"));
                                     pessoa.setIdade(String.valueOf(document.get("idade")));
                                     pessoa.setNome(String.valueOf(document.getString("nome")));
                                     pessoa.setSexo(String.valueOf(document.getString("sexo")));

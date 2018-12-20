@@ -9,4 +9,16 @@
     <string name="sign_in">SIGN IN</string>
     <string name="conection_error">Conection error. Tap to try again.</string>
     <string name="permission_error">Permisson error. Tap to try again.</string>
+    <string name="peoples">PEOPLES</string>
+    <string name="basketball">BASKETBALL</string>
+    <string name="football">FOOTBALL</string>
+    <string name="volleyball">VOLLEYBALL</string>
+    <string name="handball">HANDBALL</string>
+    <string name="tennis">TENNIS</string>
+    <string name="peteca">PETECA</string>
+    <string name="athletics">ATHLETICS</string>
+    <string name="n_o_foram_encontradas_pessoas_nesse_esporte_em_um_raio_de_10km">"No people were found in this sport within a 10Km radius. "</string>
+    <string name="uploading">Uploading</string>
+    <string name="uploaded">Uploaded</string>
+    <string name="failed">Falho</string>
 </resources>

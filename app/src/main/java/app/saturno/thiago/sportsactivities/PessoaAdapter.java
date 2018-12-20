@@ -11,7 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
@@ -43,8 +48,16 @@ public class PessoaAdapter extends ArrayAdapter<Pessoa> {
         TextView txtNome = (TextView)view.findViewById(R.id.txtNome);
         TextView txtIdade = (TextView)view.findViewById(R.id.txtIdade);
         TextView txtTelefone = (TextView)view.findViewById(R.id.txtTelefone);
+        ImageView imageView = (ImageView)view.findViewById(R.id.perfilLista) ;
 
         Pessoa pessoa = dados.get(position);
+
+        String urlImage = pessoa.getFotoPerfil();
+
+        Glide.with(context)
+                .load(urlImage)
+                .into(imageView);
+
 
         txtNome.setText("Nome " + pessoa.getNome()+"  ");
         txtIdade.setText("Idade " + pessoa.getIdade());

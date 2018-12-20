@@ -51,13 +51,13 @@ public class Pessoa {
         this.sexo = sexo;
     }
 
-    private String imei;
+    private String fotoPerfil;
 
-    public String getImei() {
-        return imei;
+    public String getFotoPerfil() {
+        return fotoPerfil;
     }
 
-    public void setImei(String imei) {
-        this.imei = imei;
+    public void setFotoPerfil(String fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 }

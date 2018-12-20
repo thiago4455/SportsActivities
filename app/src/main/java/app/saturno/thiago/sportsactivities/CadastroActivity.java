@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.MediaStore;
@@ -16,8 +17,11 @@ import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +38,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -53,6 +59,32 @@ public class CadastroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+        List<String> list = new ArrayList<String>();
+        list.add("Masculino");
+        list.add("Feminino");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner spinner = (Spinner) findViewById(R.id.txtSexo);
+        spinner.setAdapter(adapter);
+        spinner.setSelection(0, true);
+        View v = spinner.getSelectedView();
+        ((TextView)v).setTextColor(Color.WHITE);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                //Change the selected item's text color
+                ((TextView) view).setTextColor(Color.WHITE);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+            }
+        });
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -63,39 +95,6 @@ public class CadastroActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(CadastroActivity.this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         616);
-
-                Map<String, Object> usuario = new HashMap<>();
-                usuario.put("nome", ((TextView) findViewById(R.id.txtNome)).getText().toString());
-                usuario.put("idade", Integer.parseInt(((TextView) findViewById(R.id.txtIdade)).getText().toString()));
-                usuario.put("sexo", ((TextView) findViewById(R.id.txtSexo)).getText().toString());
-                usuario.put("telefone", ((TextView) findViewById(R.id.txtTelefone)).getText().toString());
-
-                TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-                if (ActivityCompat.checkSelfPermission(CadastroActivity.this, android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-                    Intent i = new Intent(CadastroActivity.this,ErroActivity.class);
-                    i.putExtra("tipo","permissao");
-                    return;
-                }
-                imei = telephonyManager.getDeviceId();
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                db.collection("usuarios").document(imei)
-                        .set(usuario)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Intent i = new Intent(CadastroActivity.this, MainActivity.class);
-                                i.putExtra("id", imei);
-                                startActivity(i);
-                                finish();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                startActivity(new Intent(CadastroActivity.this, ErroActivity.class));
-                                finish();
-                            }
-                        });
             }
         });
 
@@ -142,6 +141,42 @@ public class CadastroActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Toast.makeText(CadastroActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                            Log.e("TASK:", "URL: "+taskSnapshot.getDownloadUrl());
+
+
+                            Map<String, Object> usuario = new HashMap<>();
+                            usuario.put("nome", ((TextView) findViewById(R.id.txtNome)).getText().toString());
+                            usuario.put("idade", Integer.parseInt(((TextView) findViewById(R.id.txtIdade)).getText().toString()));
+                            usuario.put("sexo", ((Spinner) findViewById(R.id.txtSexo)).getSelectedItem().toString());
+                            usuario.put("telefone", ((TextView) findViewById(R.id.txtTelefone)).getText().toString());
+                            usuario.put("fotoPerfil", (taskSnapshot.getDownloadUrl().toString()));
+
+                            TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+                            if (ActivityCompat.checkSelfPermission(CadastroActivity.this, android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                                Intent i = new Intent(CadastroActivity.this,ErroActivity.class);
+                                i.putExtra("tipo","permissao");
+                                return;
+                            }
+                            imei = telephonyManager.getDeviceId();
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            db.collection("usuarios").document(imei)
+                                    .set(usuario)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Intent i = new Intent(CadastroActivity.this, MainActivity.class);
+                                            i.putExtra("id", imei);
+                                            startActivity(i);
+                                            finish();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            startActivity(new Intent(CadastroActivity.this, ErroActivity.class));
+                                            finish();
+                                        }
+                                    });
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -154,7 +189,9 @@ public class CadastroActivity extends AppCompatActivity {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                         }
-                    });
+                    })
+            ;
+
         }
     }
 

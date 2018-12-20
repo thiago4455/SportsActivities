@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="PEOPLE"
+        android:text="@string/peoples"
         android:paddingBottom="10dp"
         android:background="@drawable/topbar"
         android:textSize="20dp"/>
@@ -20,7 +20,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Não foram encontradas pessoas nesse esporte em um raio de 10Km"
+        android:padding="30dp"
+        android:text="@string/n_o_foram_encontradas_pessoas_nesse_esporte_em_um_raio_de_10km"
         android:id="@+id/txtVazio"
         android:visibility="invisible"/>
 </LinearLayout>
