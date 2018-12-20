@@ -25,6 +25,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.google.firebase:firebase-core:16.0.1'
     compile 'com.google.firebase:firebase-firestore:15.0.0'
+    compile 'com.google.firebase:firebase-storage:15.0.0'
     compile 'de.hdodenhof:circleimageview:1.2.1'
 }
 

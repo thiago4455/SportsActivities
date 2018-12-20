@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,9 +33,12 @@ public class ListaActivity extends AppCompatActivity implements AdapterView.OnIt
         Intent intent = getIntent();
         final String id = intent.getStringExtra("id");
         String esporte = intent.getStringExtra("esporte");
+        final double longitudeAtual = intent.getDoubleExtra("coordX",0);
+        final double latitudeAtual = intent.getDoubleExtra("coordY",0);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Log.e("USUARIO:", "Id: "+id);
         Log.e("USUARIO:", "Esporte: "+esporte);
+
 
         pessoas = new ArrayList<Pessoa>();
         final PessoaAdapter adapter = new PessoaAdapter(getApplicationContext(),R.layout.activity_pessoa_item,pessoas);
@@ -49,20 +53,29 @@ public class ListaActivity extends AppCompatActivity implements AdapterView.OnIt
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if(!id.equals(document.getId())){
-                                Pessoa pessoa = new Pessoa();
-                                pessoa.setIdade(String.valueOf(document.get("idade")));
-                                pessoa.setNome(String.valueOf(document.getString("nome")));
-                                pessoa.setTelefone(String.valueOf(document.getString("telefone")));
-                                Log.e("PESSOA:", "Comparação: "+!id.equals(document.getId()));
-                                Log.e("PESSOA:", "Pessoa encontrada: "+document.getId());
-                                Log.e("PESSOA:", "Nome: "+document.getString("nome"));
-                                Log.e("PESSOA:", "Idade: "+document.get("idade"));
-                                Log.e("PESSOA:", "Telefone: "+document.getString("telefone"));
-                                Log.e("PESSOA:", "Sexo: "+document.getString("sexo"));
-                                pessoas.add(pessoa);
+                                double longitude = Double.parseDouble(String.valueOf(document.get("coordX")));
+                                double latitude = Double.parseDouble(String.valueOf(document.get("coordY")));
+                                double distancia = distancia(latitudeAtual,longitudeAtual,latitude,longitude);
+                                if(!id.equals(document.getId()) && distancia < 5){
+                                    Pessoa pessoa = new Pessoa();
+                                    pessoa.setImei(document.getId());
+                                    pessoa.setIdade(String.valueOf(document.get("idade")));
+                                    pessoa.setNome(String.valueOf(document.getString("nome")));
+                                    pessoa.setSexo(String.valueOf(document.getString("sexo")));
+                                    pessoa.setTelefone(String.valueOf(document.getString("telefone")));
+                                    Log.e("PESSOA:", "Comparação: "+!id.equals(document.getId()));
+                                    Log.e("PESSOA:", "Pessoa encontrada: "+document.getId());
+                                    Log.e("PESSOA:", "Nome: "+document.getString("nome"));
+                                    Log.e("PESSOA:", "Distancia: "+distancia);
+                                    Log.e("PESSOA:", "Idade: "+document.get("idade"));
+                                    Log.e("PESSOA:", "Telefone: "+document.getString("telefone"));
+                                    Log.e("PESSOA:", "Sexo: "+document.getString("sexo"));
+                                    pessoas.add(pessoa);
                                 }
                                 adapter.notifyDataSetChanged();
+                            }
+                            if(pessoas.size() == 0){
+                                ((TextView)ListaActivity.this.findViewById(R.id.txtVazio)).setVisibility(View.VISIBLE);
                             }
                         } else {
                             Log.e("ERRO:", "Erro ao acessar os documentos: ", task.getException());
@@ -85,5 +98,23 @@ public class ListaActivity extends AppCompatActivity implements AdapterView.OnIt
                 .putExtra(ContactsContract.Intents.Insert.NAME, nome)
                 .putExtra(ContactsContract.Intents.Insert.PHONE, numero);
         startActivityForResult(contactIntent, 1);
+    }
+
+    private double distancia(double lat1, double lon1, double lat2, double lon2) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        dist = dist * 1.609344;
+        return (dist);
+    }
+
+    private double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    private double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
     }
 }

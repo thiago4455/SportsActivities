@@ -39,14 +39,21 @@ public class PessoaAdapter extends ArrayAdapter<Pessoa> {
             LayoutInflater layoutInflater = LayoutInflater.from(context);
             view = layoutInflater.inflate(layoutResourceId, parent, false);
         }
+
         TextView txtNome = (TextView)view.findViewById(R.id.txtNome);
         TextView txtIdade = (TextView)view.findViewById(R.id.txtIdade);
         TextView txtTelefone = (TextView)view.findViewById(R.id.txtTelefone);
 
         Pessoa pessoa = dados.get(position);
-        txtNome.setText("Nome " + pessoa.getNome());
+
+        txtNome.setText("Nome " + pessoa.getNome()+"  ");
         txtIdade.setText("Idade " + pessoa.getIdade());
-        txtTelefone.setText("Telefone " + pessoa.getTelefone());
+        txtTelefone.setText("  " + pessoa.getTelefone());
+        if(pessoa.getSexo().equals("Masculino")){
+            ((TextView)view.findViewById(R.id.txtNome)).setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_masculine,0);
+        }else if(pessoa.getSexo().equals("Feminino")){
+            ((TextView)view.findViewById(R.id.txtNome)).setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_femenine,0);
+        }
 
         return view;
     }

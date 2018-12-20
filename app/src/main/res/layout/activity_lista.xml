@@ -17,4 +17,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listPessoas"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Não foram encontradas pessoas nesse esporte em um raio de 10Km"
+        android:id="@+id/txtVazio"
+        android:visibility="invisible"/>
 </LinearLayout>

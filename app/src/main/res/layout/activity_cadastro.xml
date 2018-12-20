@@ -31,10 +31,10 @@
 
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/circleImage"
             android:layout_width="120dp"
             android:layout_height="130dp"
             android:layout_marginTop="25dp"
+            android:id="@+id/imgPerfil"
             android:src="@drawable/perfil"
             android:layout_gravity="center"/>
 
