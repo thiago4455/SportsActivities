@@ -134,7 +134,13 @@ public class CadastroActivity extends AppCompatActivity {
         {
             final ProgressDialog progressDialog = new ProgressDialog(this);
             Toast.makeText(CadastroActivity.this, "Uploading", Toast.LENGTH_SHORT).show();
-
+            TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            if (ActivityCompat.checkSelfPermission(CadastroActivity.this, android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                Intent i = new Intent(CadastroActivity.this,ErroActivity.class);
+                i.putExtra("tipo","permissao");
+                return;
+            }
+            imei = telephonyManager.getDeviceId();
             StorageReference ref = storageReference.child("images/"+ imei);
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -151,13 +157,8 @@ public class CadastroActivity extends AppCompatActivity {
                             usuario.put("telefone", ((TextView) findViewById(R.id.txtTelefone)).getText().toString());
                             usuario.put("fotoPerfil", (taskSnapshot.getDownloadUrl().toString()));
 
-                            TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-                            if (ActivityCompat.checkSelfPermission(CadastroActivity.this, android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-                                Intent i = new Intent(CadastroActivity.this,ErroActivity.class);
-                                i.putExtra("tipo","permissao");
-                                return;
-                            }
-                            imei = telephonyManager.getDeviceId();
+
+
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             db.collection("usuarios").document(imei)
                                     .set(usuario)
