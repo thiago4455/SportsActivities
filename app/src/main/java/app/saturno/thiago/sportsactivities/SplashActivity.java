@@ -32,6 +32,9 @@ public class SplashActivity extends AppCompatActivity {
         if(ActivityCompat.checkSelfPermission(SplashActivity.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
         ActivityCompat.requestPermissions(SplashActivity.this,new String[]{Manifest.permission.READ_PHONE_STATE},0);}
 
+        if (ActivityCompat.checkSelfPermission(SplashActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(SplashActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
         // Create a query against the collection.
         TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
         final String imei = telephonyManager.getDeviceId();
